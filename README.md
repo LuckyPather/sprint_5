@@ -14,7 +14,7 @@
 
 ## Установка и настройка
 
-### Шаг 1: Клонирование репозитория
+### Шаг 1: Клонирование репозитория!
 
 git clone https://github.com/LuckyPather/sprint_5
 cd LuckyPather/sprint_5
