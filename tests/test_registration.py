@@ -1,22 +1,12 @@
 import time
-import logging
 
 from locators import RegistrationForm, LoginForm
-from utility import PersonGenerator
+from utility import person, log_registration_success
 
 
 class TestRegistration:
-    def setup_method(self, method):
-        self.person = PersonGenerator()
-        if method.__name__ == "test_registration_successful":
-            logging.info(
-                f"Запускаю тест с параметрами: Имя - {self.person.name}, Email - {self.person.email}, Пароль - {self.person.password}")
-        elif method.__name__ == "test_registration_unsuccessful_invalid_password":
-            logging.info(
-                f"Запускаю тест с параметрами: Имя - {self.person.name}, Email - {self.person.email}, Пароль - "
-                f"невалидный")
 
-    def test_registration_successful(self, connection):
+    def test_registration_successful(self, connection, person, log_registration_success):
         connection.get("https://stellarburgers.nomoreparties.site/register")
 
         connection.find_element(*RegistrationForm.NAME_INPUT).send_keys(self.person.name)
@@ -29,7 +19,7 @@ class TestRegistration:
         assert connection.current_url == "https://stellarburgers.nomoreparties.site/login" and connection.find_element(
             *LoginForm.HEADER_LOGIN).text == "Вход"
 
-    def test_registration_unsuccessful_invalid_password(self,connection):
+    def test_registration_unsuccessful_invalid_password(self, connection, person, log_registration_success):
         connection.get("https://stellarburgers.nomoreparties.site/register")
 
         connection.find_element(*RegistrationForm.NAME_INPUT).send_keys(self.person.name)

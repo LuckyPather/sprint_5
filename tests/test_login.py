@@ -1,12 +1,14 @@
 import time
-import logging
 
-from locators import RegistrationForm, LoginForm, MainWindow
-from utility import PersonGenerator
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
+from locators import LoginForm, MainWindow
 
 
+# Тут вполне можно подумать над параметризацией , сделать 1 тест, куда буду разные локаторы подкладывать
 class TestEntrance:
-    def setup_method(self, method):
+    def setup_method(self):
         self.credentials = {
             "email": "kuznecov988@gmail.com",
             "password": "123456"
@@ -20,7 +22,7 @@ class TestEntrance:
         connection.find_element(*LoginForm.EMAIL_INPUT).send_keys(self.credentials["email"])
         connection.find_element(*LoginForm.PASSWORD_INPUT).send_keys(self.credentials["password"])
         connection.find_element(*LoginForm.BUTTON_MAIN_LOGIN).click()
-        time.sleep(2)
+        WebDriverWait(connection, 3).until(EC.url_to_be("https://stellarburgers.nomoreparties.site/"))
         assert connection.find_element(*MainWindow.BUTTON_PLACE_AN_ORDER).text == "Оформить заказ"
 
     def test_login_by_button_personal_account(self, connection):
@@ -31,7 +33,7 @@ class TestEntrance:
         connection.find_element(*LoginForm.EMAIL_INPUT).send_keys(self.credentials["email"])
         connection.find_element(*LoginForm.PASSWORD_INPUT).send_keys(self.credentials["password"])
         connection.find_element(*LoginForm.BUTTON_MAIN_LOGIN).click()
-        time.sleep(2)
+        WebDriverWait(connection, 3).until(EC.url_to_be("https://stellarburgers.nomoreparties.site/"))
         assert connection.find_element(*MainWindow.BUTTON_PLACE_AN_ORDER).text == "Оформить заказ"
 
     def test_login_from_registration_form(self, connection):
@@ -42,7 +44,7 @@ class TestEntrance:
         connection.find_element(*LoginForm.EMAIL_INPUT).send_keys(self.credentials["email"])
         connection.find_element(*LoginForm.PASSWORD_INPUT).send_keys(self.credentials["password"])
         connection.find_element(*LoginForm.BUTTON_MAIN_LOGIN).click()
-        time.sleep(2)
+        WebDriverWait(connection, 3).until(EC.url_to_be("https://stellarburgers.nomoreparties.site/"))
         assert connection.find_element(*MainWindow.BUTTON_PLACE_AN_ORDER).text == "Оформить заказ"
 
     def test_login_from_remember_password_form(self, connection):
@@ -53,5 +55,5 @@ class TestEntrance:
         connection.find_element(*LoginForm.EMAIL_INPUT).send_keys(self.credentials["email"])
         connection.find_element(*LoginForm.PASSWORD_INPUT).send_keys(self.credentials["password"])
         connection.find_element(*LoginForm.BUTTON_MAIN_LOGIN).click()
-        time.sleep(2)
+        WebDriverWait(connection, 3).until(EC.url_to_be("https://stellarburgers.nomoreparties.site/"))
         assert connection.find_element(*MainWindow.BUTTON_PLACE_AN_ORDER).text == "Оформить заказ"

@@ -28,15 +28,13 @@ def connection():
 
 
 @pytest.fixture
-def login(connection):
+def login(connection, request):
+    email = request.param["email"]
+    password = request.param["password"]
+
     logging.info("Вхожу в аккаунт")
     connection.get("https://stellarburgers.nomoreparties.site/")
     connection.find_element(*LoginForm.BUTTON_LOGIN).click()
-    assert connection.current_url == "https://stellarburgers.nomoreparties.site/login" and connection.find_element(
-        *LoginForm.HEADER_LOGIN).text == "Вход", "Неуспешный переход на страницу логина "
-    connection.find_element(*LoginForm.EMAIL_INPUT).send_keys("kuznecov988@gmail.com")
-    connection.find_element(*LoginForm.PASSWORD_INPUT).send_keys("123456")
+    connection.find_element(*LoginForm.EMAIL_INPUT).send_keys(email)
+    connection.find_element(*LoginForm.PASSWORD_INPUT).send_keys(password)
     connection.find_element(*LoginForm.BUTTON_MAIN_LOGIN).click()
-    time.sleep(2)
-    assert connection.find_element(*MainWindow.BUTTON_PLACE_AN_ORDER).text == "Оформить заказ", ("Неуспешный вход в "
-                                                                                                 "аккаунт")
