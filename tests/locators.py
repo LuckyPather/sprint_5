@@ -4,39 +4,49 @@ from selenium.webdriver.common.by import By
 # Локаторы относящиеся к странице "Регистрация"
 class RegistrationForm:
     NAME_INPUT = (By.NAME, "name")  # Поле ввода имени
-    EMAIL_INPUT = (By.XPATH, ".//fieldset[2]//input")  # Поле ввода Email
-    PASSWORD_INPUT = (By.XPATH, ".//fieldset[3]//input")  # Поле ввода пароля
+    EMAIL_INPUT = (By.XPATH, ".//label[text()='Email']/following-sibling::input")  # Поле ввода Email
+    PASSWORD_INPUT = (By.NAME, "Пароль")  # Поле ввода пароля
     BUTTON_REGISTRATION = (By.XPATH, ".//button[text()='Зарегистрироваться']")  # Кнопка "Зарегистрироваться"
-    ERROR_PASSWORD_LENGTH = (By.XPATH, ".//form/fieldset[3]/div/p")  # Сообщение об ошибке при не соблюдении длины пароля
+    ERROR_PASSWORD_LENGTH = (
+    By.XPATH, ".//p[contains(text(), 'Некорректный пароль')]")  # Сообщение об ошибке при не соблюдении длины пароля
 
 
 class LoginForm:
-    BUTTON_LOGIN = (By.XPATH, ".//main/section[2]/div/button")  # Кнопка "Войти в аккаунт" на главном экране
-    BUTTON_PERSONAL_ACCOUNT = (By.XPATH, ".//header/nav/a/p")  # Кнопка "Личный кабинет" на главном экране
-    BUTTON_LOGIN_REGISTRATION_FORM = (By.XPATH, "//*[@id='root']//div/p/a")  # Кнопка "Войти" на экране Регистрации
+    BUTTON_LOGIN = (By.XPATH, ".//button[text()='Войти в аккаунт']")  # Кнопка "Войти в аккаунт" на главном экране
+    BUTTON_PERSONAL_ACCOUNT = (By.XPATH, ".//p[contains(text(), 'Личный Кабинет')]")  # Кнопка "Личный кабинет" на главном экране
+    BUTTON_LOGIN_REGISTRATION_FORM = (By.XPATH, ".//a[text()='Войти']")  # Кнопка "Войти" на экране Регистрации
     BUTTON_RESTORE_PASSWORD = (
-        By.XPATH, "//*[@id='root']/div//div/p[2]/a")  # Кнопка "Восстановить пароль" на экране входа
+        By.XPATH, ".//a[text()='Восстановить пароль'")  # Кнопка "Восстановить пароль" на экране входа
     BUTTON_LOGIN_FORGOT_PASSWORD_FORM = (
-        By.XPATH, ".//main/div/div/p/a")  # Кнопка "Войти" на экране востановления пароля
-    HEADER_LOGIN = (By.XPATH, ".//main/div/h2")  # Текст "Вход" на экране Входа
-    EMAIL_INPUT = (By.XPATH, ".//form/fieldset[1]//input")  # Поле ввода email
-    PASSWORD_INPUT = (By.XPATH, ".//form/fieldset[2]//input")  # Поле ввода password
-    BUTTON_MAIN_LOGIN = (By.XPATH, ".//main/div/form/button")  # Главная кнопка входа на экране Входа
+        By.XPATH, ".//a[text()='Войти'")  # Кнопка "Войти" на экране востановления пароля
+    HEADER_LOGIN = (By.XPATH, ".//h2[text()='Вход'")  # Текст "Вход" на экране Входа
+    EMAIL_INPUT = (By.XPATH, ".//label[text()='Email']/following-sibling::input")  # Поле ввода email
+    PASSWORD_INPUT = (By.NAME, "Пароль")  # Поле ввода password
+    BUTTON_MAIN_LOGIN = (By.XPATH, ".//button[text() = 'Войти']")  # Главная кнопка входа на экране Входа
 
 
 class MainWindow:
-    PERSONAL_ACCOUNT_BUTTON = (By.XPATH, ".//header/nav/a/p")  # Кнопка перехода в личный кабинет, с главной страницы
+    PERSONAL_ACCOUNT_BUTTON = (By.XPATH, ".p[text() = 'Личный кабинет']")  # Кнопка перехода в личный кабинет, с главной страницы
     BUTTON_PLACE_AN_ORDER = (
-        By.XPATH, ".//main/section[2]/div/button")  # Кнопка оформить заказ, доступна после входа  в аккаунт
-    BUTTON_BUILDER = (By.XPATH, ".//header/nav/ul/li[1]/a")  # Кнопка "Конструктор"
+        By.XPATH, ".//button[text()='Оформить заказ']")  # Кнопка оформить заказ, доступна после входа  в аккаунт
+    BUTTON_BUILDER = (By.XPATH, ".//p[text()='Конструктор']")  # Кнопка "Конструктор"
 
 
 class PersonalAccount:
-    NAME = (By.XPATH, ".//main//ul/li[1]/div/div/input")  # Имя в главном
-    BUTTON_LOG_OUT = (By.XPATH, ".//main/div/nav/ul/li[3]/button")  # Кнопка "Выйти"
+    LOGIN_INPUT = (By.XPATH, ".//label[text()='Логин']/following-sibling::input")
+    BUTTON_LOG_OUT = (By.XPATH, ".//button[text()='Выход']")  # Кнопка "Выйти"
 
 
 class Builder:
     TAB_BREAD = (By.XPATH, "//span[@class='text text_type_main-default' and text()='Булки']")  # Вкладка Булки
     TAB_SAUCE = (By.XPATH, "//span[@class='text text_type_main-default' and text()='Соусы']")  # Вкладка Соусы
     TAB_FILLING = (By.XPATH, "//span[@class='text text_type_main-default' and text()='Начинки']")  # Вкладка Начинки
+    SELECTED_TAB_CLASS = "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect"  # Класс для выбраной вкладки
+
+
+class LINK:
+    LINK_HOME = "https://stellarburgers.nomoreparties.site"
+    LINK_LOGIN = "https://stellarburgers.nomoreparties.site/login"
+    LINK_REGISTER = "https://stellarburgers.nomoreparties.site/register"
+    LINK_PROFILE = "https://stellarburgers.nomoreparties.site/account/profile"
+    LINK_FORGOT_PASSWORD = "https://stellarburgers.nomoreparties.site/forgot-password"

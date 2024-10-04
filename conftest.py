@@ -1,9 +1,10 @@
 from selenium import webdriver
-from tests.locators import LoginForm, MainWindow
+from tests.locators import LoginForm, LINK
 
+from tests.utility import PersonGenerator
 import pytest
 import logging
-import time
+
 
 
 def pytest_configure(config):
@@ -33,8 +34,24 @@ def login(connection, request):
     password = request.param["password"]
 
     logging.info("Вхожу в аккаунт")
-    connection.get("https://stellarburgers.nomoreparties.site/")
+    connection.get(LINK.LINK_HOME)
     connection.find_element(*LoginForm.BUTTON_LOGIN).click()
     connection.find_element(*LoginForm.EMAIL_INPUT).send_keys(email)
     connection.find_element(*LoginForm.PASSWORD_INPUT).send_keys(password)
     connection.find_element(*LoginForm.BUTTON_MAIN_LOGIN).click()
+
+
+@pytest.fixture
+def person():
+    person = PersonGenerator()
+    return person
+
+
+@pytest.fixture
+def log_registration_success(person, request):
+    # В зависимости от имени теста логируем разные данные
+    if request.node.name == "test_registration_successful":
+        logging.info(
+            f"Запускаю тест с параметрами: Имя - {person.name}, Email - {person.email}, Пароль - {person.password}")
+    elif request.node.name == "test_registration_unsuccessful_invalid_password":
+        logging.info(f"Запускаю тест с параметрами: Имя - {person.name}, Email - {person.email}, Пароль - невалидный")

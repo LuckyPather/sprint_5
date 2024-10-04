@@ -1,7 +1,5 @@
 import random
 import string
-import pytest
-import logging
 
 
 class PersonGenerator:
@@ -29,17 +27,3 @@ class PersonGenerator:
         return password
 
 
-@pytest.fixture
-def person():
-    person = PersonGenerator()
-    return person
-
-
-@pytest.fixture
-def log_registration_success(person, request):
-    # В зависимости от имени теста логируем разные данные
-    if request.node.name == "test_registration_successful":
-        logging.info(
-            f"Запускаю тест с параметрами: Имя - {person.name}, Email - {person.email}, Пароль - {person.password}")
-    elif request.node.name == "test_registration_unsuccessful_invalid_password":
-        logging.info(f"Запускаю тест с параметрами: Имя - {person.name}, Email - {person.email}, Пароль - невалидный")
