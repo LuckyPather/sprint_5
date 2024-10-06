@@ -1,4 +1,5 @@
-from locators import Builder, LINK
+from locators import Builder
+from tests.constans import LINK
 
 
 # При выборе той или иной вкладки меняется класс, значит выбрав вкладку и сравнив ее измененный класс можно

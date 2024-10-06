@@ -2,7 +2,8 @@ import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from locators import LoginForm, MainWindow, PersonalAccount, LINK
+from locators import LoginForm, MainWindow, PersonalAccount
+from tests.constans import LINK
 from data_for_tests import LoginData
 
 

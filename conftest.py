@@ -1,5 +1,6 @@
 from selenium import webdriver
-from tests.locators import LoginForm, LINK
+from tests.locators import LoginForm
+from tests.constans import LINK
 
 from tests.utility import PersonGenerator
 import pytest

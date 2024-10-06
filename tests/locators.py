@@ -42,11 +42,3 @@ class Builder:
     TAB_SAUCE = (By.XPATH, "//span[@class='text text_type_main-default' and text()='Соусы']")  # Вкладка Соусы
     TAB_FILLING = (By.XPATH, "//span[@class='text text_type_main-default' and text()='Начинки']")  # Вкладка Начинки
     SELECTED_TAB_CLASS = "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect"  # Класс для выбраной вкладки
-
-
-class LINK:
-    LINK_HOME = "https://stellarburgers.nomoreparties.site"
-    LINK_LOGIN = "https://stellarburgers.nomoreparties.site/login"
-    LINK_REGISTER = "https://stellarburgers.nomoreparties.site/register"
-    LINK_PROFILE = "https://stellarburgers.nomoreparties.site/account/profile"
-    LINK_FORGOT_PASSWORD = "https://stellarburgers.nomoreparties.site/forgot-password"

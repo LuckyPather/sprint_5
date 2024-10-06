@@ -1,6 +1,7 @@
 import time
 
-from locators import RegistrationForm, LoginForm, LINK
+from locators import RegistrationForm, LoginForm
+from tests.constans import LINK
 
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
